@@ -58,3 +58,6 @@ def apply_leave(employee_id: str, days: int) -> str:
         return f"Leave approved for {days} day(s)."
     else:
         return "Insufficient leave balance."
+
+if __name__ == "__main__":
+    mcp.run()
