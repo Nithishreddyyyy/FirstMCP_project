@@ -1,7 +1,8 @@
 ```markdown
 # 🧾 Leave Management MCP App
 
-This is a simple **Model Context Protocol (MCP)** app built using `FastMCP`, designed to manage employee leave data with in-memory storage. It exposes **structured resources and tools** that can be accessed by Claude or other MCP-compliant agents to query or modify state.
+This is a simple **Model Context Protocol (MCP)** app built using `FastMCP`, designed to manage employee leave data with in-memory storage. 
+It exposes **structured resources and tools** that can be accessed by Claude or other MCP-compliant agents to query or modify state.
 
 ---
 
