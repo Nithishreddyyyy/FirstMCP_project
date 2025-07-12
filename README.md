@@ -15,7 +15,7 @@ Install the required tools:
 ```bash
 pip install mcp
 pip install uv
-
+pip install 'mcp[cli]'
 ```
 
 > ✅ mcp – Framework to define structured tools and resources for Claude
