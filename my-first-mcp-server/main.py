@@ -1,10 +1,15 @@
 from mcp.server.fastmcp import FastMCP
 from datetime import date
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Create Leave Management MCP Server
 mcp = FastMCP("LeaveManagement")
 
-# In-memory employee leave database
+# Your existing code...
 leave_data = {
     "E001": {
         "balance": 10,
@@ -18,18 +23,17 @@ leave_data = {
     }
 }
 
-# Resource: Get current leave status + history
+# Your existing functions...
 @mcp.resource("leave://status/{employee_id}")
 def get_leave_status(employee_id: str) -> dict:
-    """Return leave balance, total leaves taken, and history"""
+    logger.info(f"Getting leave status for {employee_id}")
     if employee_id in leave_data:
         return leave_data[employee_id]
     return {"error": "Employee not found"}
 
-# Resource: Personalized greeting for an employee
 @mcp.resource("leave://greeting/{employee_id}")
 def leave_greeting(employee_id: str) -> str:
-    """Return a personalized greeting with leave info"""
+    logger.info(f"Getting greeting for {employee_id}")
     if employee_id in leave_data:
         record = leave_data[employee_id]
         return (
@@ -38,16 +42,13 @@ def leave_greeting(employee_id: str) -> str:
         )
     return "Employee not found."
 
-
-# Tool: Apply for leave and update history
 @mcp.tool()
 def apply_leave(employee_id: str, days: int) -> str:
-    """Apply leave for an employee"""
+    logger.info(f"Applying {days} days leave for {employee_id}")
     if employee_id not in leave_data:
         return "Employee not found"
     
     record = leave_data[employee_id]
-
     if record["balance"] >= days:
         record["balance"] -= days
         record["leaves"] += days
@@ -60,4 +61,5 @@ def apply_leave(employee_id: str, days: int) -> str:
         return "Insufficient leave balance."
 
 if __name__ == "__main__":
+    logger.info("Starting Leave Management MCP Server...")
     mcp.run()
